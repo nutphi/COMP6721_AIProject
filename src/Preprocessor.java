@@ -43,12 +43,8 @@ public class Preprocessor {
 		}
 	}
 
-	public BufferedImage normalize(BufferedImage img)
-	{
+	public BufferedImage normalize(BufferedImage img, int afterWidth, int afterHeight) {
 		BufferedImage imgBorder= ImageProcessor.copyBufferedImageWithBorder(img);
-
-		int afterWidth = 564;
-		int afterHeight = 564;
 		double w_alpha1 = afterWidth / (imgBorder.getWidth()-2);
 		double h_beta1 = afterHeight / (imgBorder.getHeight()-2);
 
@@ -82,8 +78,8 @@ public class Preprocessor {
 		BufferedImage b = ImageProcessor.load(new File("0/ID00002_p1_B12_GL.png"));
 		p.binarize(b);
 		p.smooth(b);
-		ImageProcessor.save(p.normalize(b), new File("image1.jpg"));
-		ArrayList<Integer> topView = ImageProcessor.getTopViewList(p.normalize(b));
+		ImageProcessor.save(p.normalize(b,64,64), new File("image1.jpg"));
+		ArrayList<Integer> topView = ImageProcessor.getTopViewList(p.normalize(b,64,64));
 		System.out.println(topView.size());
 		for(int n:topView)
 		{
